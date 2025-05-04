@@ -5,8 +5,8 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "test",
-      component: () => import("./views/Test.vue"),
+      name: "home",
+      component: () => import("./views/Index.vue"),
     },
     {
       path: "/posts/:id",
@@ -23,6 +23,22 @@ const router = createRouter({
       name: "crud",
       component: () => import("./views/CRUD.vue"),
     },
+    // api service practice
+    {
+      path: "/api-service",
+      name: "api.service",
+      component: () => import("./views/Services.vue")
+    },
+    {
+      path: "/authorization",
+      name: "authorization",
+      component: ()=> import("./views/Authorization.vue"),
+    },
+    {
+      path: "/face-auth",
+      name: 'face-auth',
+      component: ()=> import("./views/FaceAuth.vue"),
+    }
   ],
 });
 

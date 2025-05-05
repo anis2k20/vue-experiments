@@ -38,6 +38,11 @@ const router = createRouter({
       path: "/face-auth",
       name: 'face-auth',
       component: ()=> import("./views/FaceAuth.vue"),
+    },
+    {
+      path: "/dashboard",
+      name: 'dashboard',
+      component: ()=> import("./views/Dashboard.vue"),
     }
   ],
 });

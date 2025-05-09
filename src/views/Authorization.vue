@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import axios from 'axios'
   
   const email = ref('')
@@ -8,35 +8,36 @@
   const token = ref('');
   
   const handleLogin = async () => {
-    try {
-      const response = await axios.post(
-        'https://reqres.in/api/login', 
+  try {
+    const response = await axios.post(
+      'https://reqres.in/api/login',
       {
         email: email.value,
         password: password.value,
       },
       {
         headers: {
-          'x-api-key':'reqres-free-v1',
+          'x-api-key': 'reqres-free-v1',
           'Content-Type': 'application/json'
         },
-        
       }
     )
-  
-      const token = response.data.token
-      message.value = "Login Successful!";
-      localStorage.setItem('token', token) // Save token
-  
-      
-      // Redirect to dashboard or homepage
-      window.location.href = '/dashboard'
-    } catch (err) {
-      error.value = 'Login failed: ' + err.response?.data?.message || err.message
-    }
-  }
 
-  const t = localStorage.getItem('token');
+    token.value = response.data.token
+    localStorage.setItem('token', token.value) // Save token
+    window.location.href = '/dashboard'
+  } catch (err) {
+    error.value = 'Login failed: ' + (err.response?.data?.error || err.message)
+  }
+}
+
+function fetchToken(){
+  token.value = localStorage.getItem('token');
+}
+
+onMounted(()=>{
+  fetchToken();
+})
   </script>
   
 <template>
@@ -50,7 +51,7 @@
     </form>
   <p class="text-center text-gray-400 text-sm">email: <strong>eve.holt@reqres.in</strong></p>
   <p class="text-center text-gray-400 text-sm">password: <strong>cityslicka</strong></p>
-  <p class="text-center text-gray-400 text-sm">token: <strong>{{ t }}</strong></p>
+  <p class="text-center text-gray-400 text-sm">token: <strong>{{ token }}</strong></p>
   </div>
   </template>
   

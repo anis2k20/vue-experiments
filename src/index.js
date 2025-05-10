@@ -43,6 +43,11 @@ const router = createRouter({
       path: "/dashboard",
       name: 'dashboard',
       component: ()=> import("./views/Dashboard.vue"),
+    },
+    {
+      path: "/pagination",
+      name: "pagination",
+      component: ()=> import("./views/Pagination.vue"),
     }
   ],
 });
